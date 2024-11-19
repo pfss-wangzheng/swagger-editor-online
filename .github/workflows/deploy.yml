@@ -28,7 +28,7 @@ jobs:
        run: |
          cd swagger-editor
          npm install
-         npm run build
+         npm start
      - name: Deploy to GitHub Pages
        uses: peaceiris/actions-gh-pages@v4  
        with:
