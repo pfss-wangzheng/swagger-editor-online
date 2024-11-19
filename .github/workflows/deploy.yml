@@ -1,0 +1,36 @@
+
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+  workflow_dispatch:
+
+permissions:
+  contents: read                  
+  pages: write                 
+
+jobs:
+  buildswaggerEditor:
+    runs-on: ubuntu-latest
+
+    steps:
+     - name: Checkout swagger-editor   
+       uses: actions/checkout@v4
+       with:
+          repository: swagger-api/swagger-editor
+          ref: 'v4.14.0'
+          path: swagger-editor
+       
+     - name: Build Swagger Editor
+       run: |
+         cd swagger-editor
+         npm install
+         npm run build
+     - name: Deploy to GitHub Pages
+       uses: peaceiris/actions-gh-pages@v4  
+       with:
+          publish_dir: ./swagger-editor/dist
