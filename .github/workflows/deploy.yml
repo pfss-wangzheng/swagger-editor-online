@@ -10,8 +10,8 @@ on:
 
 permissions:
   contents: read                  
-  pages: write                 
-
+  pages: write      
+  id-token: write 
 jobs:
   buildswaggerEditor:
     runs-on: ubuntu-latest
@@ -32,4 +32,5 @@ jobs:
      - name: Deploy to GitHub Pages
        uses: peaceiris/actions-gh-pages@v4  
        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./swagger-editor/dist
